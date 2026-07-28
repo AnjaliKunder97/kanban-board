@@ -57,13 +57,24 @@ close it, real-time sync stops working (you'll see a
 `ERR_CONNECTION_REFUSED` error in the browser console, which just means
 this server isn't running).
 
+## Live Demo
+
+https://kanban-board-fawn-six.vercel.app/
+
+**Note:** the real-time server (hosted on Render's free tier) sleeps
+after 15 minutes of inactivity. If the link has been idle, the first
+real-time connection may take 30-60 seconds to activate while the
+server wakes up - this is a free-tier hosting limitation, not a bug.
+
 ## Trying out the real-time sync
 
-1. Go to `http://localhost:3000`
+1. Go to https://kanban-board-fawn-six.vercel.app/
 2. Click **Create New Board**
-3. Copy the URL you land on (something like `http://localhost:3000/board/a1b2c3d4`)
+3. Copy the URL you land on (something like `https://kanban-board-fawn-six.vercel.app/board/a1b2c3d4`)
 4. Open that **exact same URL** in a second browser tab or an incognito window
 5. Add a card, or drag a card between lists, in one tab
 6. Watch it appear/move in the other tab within a second or two
+
+*(You can also run this locally instead - see "Running the project" above.)*
 
 ## Project structure
