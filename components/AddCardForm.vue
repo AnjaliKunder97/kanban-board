@@ -10,6 +10,7 @@ const text = ref('');
 const emit = defineEmits<{ add: [text: string] }>();
 
 function submit() {
+   alert('submit fired: ' + text.value);  // TEMPORARY - just to test
   if (text.value.trim()) {
     emit('add', text.value.trim());
     text.value = '';

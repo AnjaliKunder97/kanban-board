@@ -18,10 +18,12 @@ export const useBoardStore = defineStore('board', {
 
     addCard(listId: string, text: string) {
       const list = this.board?.lists.find((l) => l.id === listId);
+      console.log('addCard called with listId:', listId, 'found list:', list); // TEMPORARY
       if (!list) return;
 
       const card: Card = { id: crypto.randomUUID(), text, createdAt: Date.now() };
       list.cards.push(card);
+      console.log('board state after push:', JSON.stringify(this.board)); // TEMPORARY
     },
 
     moveCard(cardId: string, fromListId: string, toListId: string, newIndex: number) {

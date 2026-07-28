@@ -1,5 +1,9 @@
 <template>
-  <div class="kanban-card">
+  <div
+    class="kanban-card"
+    draggable="true"
+    @dragstart="onDragStart"
+  >
     <p>{{ card.text }}</p>
     <button type="button" class="remove-btn" @click="$emit('remove')" aria-label="Remove card">
       ×
@@ -10,8 +14,18 @@
 <script setup lang="ts">
 import type { Card } from '~/types/kanban';
 
-defineProps<{ card: Card }>();
+const props = defineProps<{ card: Card; listId: string }>();
 defineEmits<{ remove: [] }>();
+
+function onDragStart(event: DragEvent) {
+  // Stash which card and which list it came from, so the drop target
+  // can read this back out - dataTransfer is the standard native way
+  // to pass data between drag source and drop target.
+  event.dataTransfer?.setData(
+    'application/json',
+    JSON.stringify({ cardId: props.card.id, fromListId: props.listId }),
+  );
+}
 </script>
 
 <style scoped>
@@ -25,6 +39,10 @@ defineEmits<{ remove: [] }>();
   align-items: flex-start;
   gap: 0.5rem;
   cursor: grab;
+}
+
+.kanban-card:active {
+  cursor: grabbing;
 }
 
 .kanban-card p {
