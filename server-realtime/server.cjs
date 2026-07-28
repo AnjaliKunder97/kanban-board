@@ -1,6 +1,8 @@
 const { Server } = require('socket.io');
 
-const io = new Server(4000, {
+const PORT = process.env.PORT || 4000;
+
+const io = new Server(PORT, {
   cors: { origin: '*' },
 });
 
@@ -20,4 +22,4 @@ io.on('connection', (socket) => {
   });
 });
 
-console.log('Realtime server running on port 4000');
+console.log(`Realtime server running on port ${PORT}`);
