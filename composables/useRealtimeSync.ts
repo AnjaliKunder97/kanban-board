@@ -3,7 +3,7 @@ import { useBoardStore } from '~/stores/board.store';
 
 export function useRealtimeSync(boardId: string) {
   const boardStore = useBoardStore();
-  const socket = io('http://localhost:4000');
+  const socket = io('https://kanban-realtime-server.onrender.com');
 
   socket.emit('join-board', boardId);
 
