@@ -10,7 +10,7 @@ tab and watch it move in another, in real time.
 - **Pinia** - state management
 - **TypeScript** - throughout
 - **Socket.io** - real-time sync between connected clients
-- **vue-draggable-next** - drag-and-drop card interactions
+- **Native HTML5 Drag-and-Drop** - drag-and-drop card interactions (switched from a library after finding a Vue reactivity bug)
 
 ## Architecture note
 
