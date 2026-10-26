@@ -1,11 +1,13 @@
 <template>
-  <div class="board-page">
-    <div class="board-header">
-      <h1>{{ boardStore.board?.name ?? 'Loading board...' }}</h1>
-      <p class="board-id">Board ID: <code>{{ boardId }}</code> (share this to collaborate)</p>
-    </div>
+  <v-container max-width="1100" class="py-8">
+    <header class="mb-8">
+      <h1 class="text-h4 mb-1">{{ boardStore.board?.name ?? 'Loading board...' }}</h1>
+      <p class="text-body-2 text-medium-emphasis">
+        Board ID: <code>{{ boardId }}</code> (share this to collaborate)
+      </p>
+    </header>
 
-    <div v-if="boardStore.board" class="board-lists">
+    <div v-if="boardStore.board" class="d-flex ga-6 align-start overflow-x-auto pb-2">
       <KanbanList
         v-for="list in boardStore.board.lists"
         :key="list.id"
@@ -13,13 +15,13 @@
         @changed="broadcastUpdate"
       />
     </div>
-  </div>
+  </v-container>
 </template>
 
 <script setup lang="ts">
-// `useRoute`, `useBoardStore` (from stores/board.store.ts), and
-// `useRealtimeSync` (from composables/useRealtimeSync.ts) are all
-// auto-imported by Nuxt - no import statements needed for any of them.
+import { useRoute } from 'nuxt/app';
+import { useBoardStore } from '../../stores/board.store';
+import { useRealtimeSync } from '../../composables/useRealtimeSync'
 const route = useRoute();
 const boardId = route.params.id as string;
 
@@ -44,25 +46,5 @@ if (!boardStore.board) {
 </script>
 
 <style scoped>
-.board-page {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 2rem 1.5rem;
-  font-family: 'Segoe UI', Roboto, sans-serif;
-}
 
-.board-header {
-  margin-bottom: 2rem;
-}
-
-.board-id {
-  color: #5f6368;
-  font-size: 0.9rem;
-}
-
-.board-lists {
-  display: flex;
-  gap: 1.5rem;
-  align-items: flex-start;
-}
 </style>

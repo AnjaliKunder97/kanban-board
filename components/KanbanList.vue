@@ -1,9 +1,9 @@
 <template>
-  <div class="kanban-list">
-    <h3>{{ list.title }}</h3>
+  <v-card class="kanban-list pa-4 border" flat>
+    <h3 class="text-subtitle-1 font-weight-bold mb-4">{{ list.title }}</h3>
 
     <div
-      class="card-drop-zone"
+      class="card-drop-zone d-flex flex-column ga-2"
       :class="{ 'drag-over': isDraggedOver }"
       @dragover.prevent="isDraggedOver = true"
       @dragleave="isDraggedOver = false"
@@ -19,12 +19,13 @@
     </div>
 
     <AddCardForm @add="addCard" />
-  </div>
+  </v-card>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { KanbanList as KanbanListType } from '~/types/kanban';
+import type { KanbanList as KanbanListType } from '../types/kanban';
+import { useBoardStore } from '../stores/board.store';
 
 const props = defineProps<{ list: KanbanListType }>();
 const emit = defineEmits<{ changed: [] }>();
@@ -64,29 +65,19 @@ function onDrop(event: DragEvent) {
 
 <style scoped>
 .kanban-list {
-  background: #f1f3f4;
-  border-radius: 8px;
-  padding: 1rem;
   width: 260px;
   flex-shrink: 0;
-}
-
-h3 {
-  margin: 0 0 1rem;
-  font-size: 0.95rem;
+  background-color: rgba(var(--v-theme-on-surface), 0.08);
 }
 
 .card-drop-zone {
   min-height: 60px;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
   border-radius: 6px;
   transition: background-color 0.15s ease;
 }
 
 .card-drop-zone.drag-over {
-  background-color: rgba(26, 115, 232, 0.1);
-  outline: 2px dashed #1a73e8;
+  background-color: rgba(var(--v-theme-primary), 0.1);
+  outline: 2px dashed rgb(var(--v-theme-primary));
 }
 </style>

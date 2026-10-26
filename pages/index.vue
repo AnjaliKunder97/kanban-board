@@ -23,6 +23,9 @@
 </template>
 
 <script setup lang="ts">
+import { useRouter } from 'nuxt/app';
+import { ref } from 'vue';
+
 const router = useRouter();
 const joinId = ref('');
 

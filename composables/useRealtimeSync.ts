@@ -1,5 +1,5 @@
 import { io } from 'socket.io-client';
-import { useBoardStore } from '~/stores/board.store';
+import { useBoardStore } from '../stores/board.store';
 
 export function useRealtimeSync(boardId: string) {
   const boardStore = useBoardStore();

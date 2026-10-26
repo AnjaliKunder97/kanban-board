@@ -1,18 +1,25 @@
 <template>
-  <div
+  <v-card
     class="kanban-card"
     draggable="true"
+    elevation="1"
     @dragstart="onDragStart"
   >
-    <p>{{ card.text }}</p>
-    <button type="button" class="remove-btn" @click="$emit('remove')" aria-label="Remove card">
-      ×
-    </button>
-  </div>
+    <div class="d-flex justify-space-between align-start pa-3 ga-2">
+      <p class="text-body-2">{{ card.text }}</p>
+      <v-btn
+        icon="mdi-close"
+        size="x-small"
+        variant="text"
+        aria-label="Remove card"
+        @click="$emit('remove')"
+      />
+    </div>
+  </v-card>
 </template>
 
 <script setup lang="ts">
-import type { Card } from '~/types/kanban';
+import type { Card } from '../types/kanban';
 
 const props = defineProps<{ card: Card; listId: string }>();
 defineEmits<{ remove: [] }>();
@@ -30,33 +37,10 @@ function onDragStart(event: DragEvent) {
 
 <style scoped>
 .kanban-card {
-  background: #fff;
-  border-radius: 6px;
-  padding: 0.75rem;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 0.5rem;
   cursor: grab;
 }
 
 .kanban-card:active {
   cursor: grabbing;
-}
-
-.kanban-card p {
-  margin: 0;
-  font-size: 0.9rem;
-}
-
-.remove-btn {
-  background: none;
-  border: none;
-  font-size: 1.1rem;
-  color: #5f6368;
-  cursor: pointer;
-  line-height: 1;
-  padding: 0;
 }
 </style>
