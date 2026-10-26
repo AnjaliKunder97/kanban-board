@@ -30,7 +30,6 @@ const router = useRouter();
 const joinId = ref('');
 
 function createBoard() {
-  // crypto.randomUUID() generates a real random ID, browser-native,
   const newId = crypto.randomUUID().slice(0, 8);
   router.push(`/board/${newId}`);
 }
@@ -41,6 +40,3 @@ function joinBoard() {
   }
 }
 </script>
-
-<style>
-</style>

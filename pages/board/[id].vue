@@ -28,10 +28,8 @@ const boardId = route.params.id as string;
 const boardStore = useBoardStore();
 const { broadcastUpdate } = useRealtimeSync(boardId);
 
-// If this is a brand new board ID nobody has joined yet, seed it with
-// an empty starter board (three empty lists) rather than showing
-// nothing. If someone else already created this board, the realtime
-// sync will overwrite this with the real state once it connects.
+// Seed a new board with three empty lists; realtime sync overwrites
+// this with the real state if the board already exists.
 if (!boardStore.board) {
   boardStore.setBoard({
     id: boardId,

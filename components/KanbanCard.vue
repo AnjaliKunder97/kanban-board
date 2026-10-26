@@ -25,9 +25,6 @@ const props = defineProps<{ card: Card; listId: string }>();
 defineEmits<{ remove: [] }>();
 
 function onDragStart(event: DragEvent) {
-  // Stash which card and which list it came from, so the drop target
-  // can read this back out - dataTransfer is the standard native way
-  // to pass data between drag source and drop target.
   event.dataTransfer?.setData(
     'application/json',
     JSON.stringify({ cardId: props.card.id, fromListId: props.listId }),

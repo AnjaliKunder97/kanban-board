@@ -49,16 +49,11 @@ function onDrop(event: DragEvent) {
   if (!data) return;
 
   const { cardId, fromListId } = JSON.parse(data);
-
-  // Don't do anything if a card is dropped back into its own list -
-  // no actual move needed.
   if (fromListId === props.list.id) return;
 
-  // Simplified: dropped cards go to the end of the target list, rather
-  // than trying to calculate a precise drop-position index. Precise
-  // reordering within a list is a reasonable future enhancement, not
-  // required to demonstrate working drag-and-drop between lists.
-  boardStore.moveCard(cardId, fromListId, props.list.id, boardStore.board?.lists.find(l => l.id === props.list.id)?.cards.length ?? 0);
+  // Dropped cards are appended to the end of the target list.
+  const targetList = boardStore.board?.lists.find(l => l.id === props.list.id);
+  boardStore.moveCard(cardId, fromListId, props.list.id, targetList?.cards.length ?? 0);
   emit('changed');
 }
 </script>
